@@ -1,0 +1,141 @@
+{
+    "name": "nuxt-app",
+    "version": "0.1.0",
+    "author": "Zero",
+    "license": "MIT",
+    "private": true,
+    "type": "module",
+    "main": "dist/main.js",
+    "scripts": {
+        "build": "nuxt build",
+        "dev": "nuxt dev",
+        "generate": "nuxt generate",
+        "preview": "nuxt preview",
+        "postinstall": "nuxt prepare",
+        "lint": "eslint 'src/**/*.ts'",
+        "format": "prettier --write 'src/**/*.{ts,json}'",
+        "type-check": "tsc --noEmit",
+        "fix": "npm run lint -- --fix && npm run format",
+        "check": "npm run type-check && npm run lint && npm run format -- --check"
+    },
+    "dependencies": {
+        "@oxc-parser/binding-darwin-arm64": "0.99.0",
+        "nuxt": "3.17.7",
+        "vue": "3.5.17",
+        "vue-router": "4.6.4"
+    },
+    "devDependencies": {
+        "@types/node": "25.0.9",
+        "@typescript-eslint/eslint-plugin": "8.0.0",
+        "@typescript-eslint/parser": "8.0.0",
+        "eslint": "8.57.0",
+        "eslint-config-prettier": "9.1.0",
+        "prettier": "3.0.0",
+        "ts-node": "10.9.2",
+        "tsx": "4.21.0",
+        "typescript": "5.9.3"
+    },
+    "prettier": {
+        "semi": true,
+        "trailingComma": "none",
+        "singleQuote": false,
+        "quoteProps": "as-needed",
+        "printWidth": 100,
+        "tabWidth": 4,
+        "useTabs": false,
+        "arrowParens": "always",
+        "endOfLine": "lf",
+        "bracketSpacing": true,
+        "bracketSameLine": false
+    },
+    "eslintConfig": {
+        "root": true,
+        "parser": "@typescript-eslint/parser",
+        "parserOptions": {
+            "ecmaVersion": 2017,
+            "sourceType": "module",
+            "project": "./tsconfig.json"
+        },
+        "plugins": [
+            "@typescript-eslint"
+        ],
+        "extends": [
+            "eslint:recommended",
+            "plugin:@typescript-eslint/recommended",
+            "prettier"
+        ],
+        "env": {
+            "node": true,
+            "es2017": true
+        },
+        "rules": {
+            "@typescript-eslint/no-explicit-any": "error",
+            "@typescript-eslint/no-unsafe-assignment": "error",
+            "@typescript-eslint/no-unsafe-member-access": "error",
+            "@typescript-eslint/no-unsafe-call": "error",
+            "@typescript-eslint/no-unsafe-return": "error",
+            "@typescript-eslint/no-unsafe-argument": "error",
+            "quotes": [
+                "error",
+                "double",
+                {
+                    "avoidEscape": true
+                }
+            ],
+            "semi": [
+                "error",
+                "always"
+            ],
+            "no-trailing-spaces": "error",
+            "eol-last": [
+                "error",
+                "always"
+            ],
+            "comma-dangle": [
+                "error",
+                "never"
+            ],
+            "arrow-parens": [
+                "error",
+                "always"
+            ],
+            "key-spacing": [
+                "error",
+                {
+                    "beforeColon": false,
+                    "afterColon": true
+                }
+            ],
+            "curly": [
+                "error",
+                "all"
+            ],
+            "no-restricted-syntax": [
+                "error",
+                {
+                    "selector": "ChainExpression",
+                    "message": "Optional chaining (?.) is ES2020+, not allowed in ES2017. Use explicit checks instead: obj && obj.prop"
+                },
+                {
+                    "selector": "LogicalExpression[operator='??']",
+                    "message": "Nullish coalescing (??) is ES2020+, not allowed in ES2017. Use || or explicit checks instead"
+                }
+            ]
+        }
+    },
+    "eslintIgnore": [
+        "node_modules",
+        ".nuxt",
+        "dist",
+        "build",
+        "coverage",
+        "*.config.js",
+        "*.config.cjs",
+        "*.config.mjs",
+        "**/*.spec.ts",
+        "**/*.test.ts",
+        "*.log",
+        "*.swp",
+        "*.swo"
+    ]
+}

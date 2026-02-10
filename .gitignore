@@ -1,0 +1,41 @@
+# Mac OS
+.DS_Store
+
+# Editor
+.idea
+.vscode
+
+# Package manager cache
+.npm
+
+# Auto-generated types
+src/types/auto-imports.d.ts
+src/types/components.d.ts
+
+# Dependencies & build
+node_modules
+dist
+dist-ssr
+*.local
+*.tsbuildinfo
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+.env
+
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+
+vite-dist
+nitro-dist
