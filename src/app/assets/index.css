@@ -1,0 +1,12 @@
+@import "@/assets/tailwind.css";
+@import "@/assets/scrollbar.css";
+
+/* 卡片 */
+.card {
+    @apply bg-cardcolor border-bordercolor rounded-2xl border shadow-xl;
+}
+
+/* 按钮 */
+.btn {
+    @apply cursor-pointer rounded-full text-sm font-bold tracking-widest transition-all hover:opacity-50;
+}

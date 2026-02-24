@@ -3,7 +3,10 @@
 
 # Editor
 .idea
-.vscode
+.vscode/*
+
+!.vscode/settings.json
+!.vscode/extensions.json
 
 # Package manager cache
 .npm

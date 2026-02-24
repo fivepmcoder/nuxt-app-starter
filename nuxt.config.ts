@@ -1,3 +1,4 @@
+import tailwindcss from "@tailwindcss/vite";
 import { defineNuxtConfig } from "nuxt/config";
 
 export default defineNuxtConfig({
@@ -17,9 +18,9 @@ export default defineNuxtConfig({
 
     // vite 配置
     vite: {
-        plugins: [],
+        plugins: [tailwindcss()],
         resolve: {
-            alias: {}
+            alias: { "@": process.cwd() + "/src/app" }
         },
         server: {
             open: false,
@@ -64,7 +65,7 @@ export default defineNuxtConfig({
                     sourceMap: true,
                     removeComments: false,
                     paths: {
-                        "@/*": ["*"]
+                        "@/*": ["./src/app/*"]
                     },
                     emitDecoratorMetadata: true,
                     experimentalDecorators: true
@@ -90,6 +91,7 @@ export default defineNuxtConfig({
 
     // typescript 配置
     typescript: {
+        typeCheck: true,
         tsConfig: {
             compilerOptions: {
                 target: "ES2017",
@@ -122,20 +124,89 @@ export default defineNuxtConfig({
                 removeComments: false,
                 emitDecoratorMetadata: true,
                 experimentalDecorators: true
-            },
-            include: ["../src/app/**/*", "../src/common/**/*"],
-            exclude: ["../node_modules", "../dist"]
+            }
         }
     },
 
     // 组件配置
-    components: [],
+    components: [
+        {
+            path: "@/layouts/components",
+            prefix: "Layouts"
+        },
+        {
+            path: "@/components",
+            global: true
+        }
+    ],
 
     // 模块配置
-    modules: [],
+    modules: ["@pinia/nuxt"],
 
     // 全局 css
-    css: [],
+    css: ["@/assets/index.css"],
+
+    app: {
+        head: {
+            style: [
+                {
+                    tagPosition: "head",
+                    tagPriority: "high",
+                    type: "text/css",
+                    children: `
+                    :root {
+                        --bg-color: #ffffff;
+                        --text-color: #1a1b1c;
+                    }
+                    [data-theme="dark"] {
+                        --bg-color: #000000;
+                        --text-color: #fafbfc;
+                    }
+                    html,
+                    body,
+                    #app {
+                        background-color: var(--bg-color);
+                        color: var(--text-color);
+                        margin: 0;
+                        min-height: 100vh;
+                    }
+                `
+                }
+            ],
+            script: [
+                {
+                    tagPosition: "head",
+                    tagPriority: "high",
+                    type: "text/javascript",
+                    children: `
+                (function () {
+                    var html = document.documentElement;
+                    if (!html) {
+                        html = document.getElementsByTagName('html')[0];
+                    }
+                    if (!html) {
+                        return;
+                    }
+                    // 获取存储的主题
+                    const stored = localStorage.getItem('theme');
+
+                    let theme = 'light';
+
+                    if (stored) {
+                        const parsed = JSON.parse(stored);
+                        theme = parsed.name || 'light';
+                    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                            theme = 'dark';
+                    }
+
+                    html.setAttribute('data-theme', theme);
+
+                    })();
+                `
+                }
+            ]
+        }
+    },
 
     // 开发工具配置
     devtools: {
